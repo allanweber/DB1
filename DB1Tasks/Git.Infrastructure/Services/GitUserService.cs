@@ -8,12 +8,12 @@ namespace Git.Infrastructure.Services
 {
     public class GitUserService : IGitUserService
     {
-        public Task<ICollection<GitUser>> GetAllUsers()
+        public async Task<ICollection<GitUser>> GetAllUsers()
         {
             throw new NotImplementedException();
         }
 
-        public Task<GitUserDetail> GetUser(string userName)
+        public async Task<GitUserDetail> GetUser(string userName)
         {
             throw new NotImplementedException();
         }
