@@ -2,29 +2,22 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { AppEnvironment } from '../../../app-environment';
-import { User } from '../models/user.model';
-import { UserDetail } from '../models/user-detail.model';
+import { Repository } from '../models/repository.model';
 import { BaseRequests } from '../../../base-requests';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class UsersService extends BaseRequests {
+export class RepositoriesService extends BaseRequests {
   constructor(private http: Http, private appEnvironment: AppEnvironment) {
     super();
   }
 
-  getAllUsers(): Observable<User[]> {
+  getUserRepositories(userName: string): Observable<Repository[]> {
     return this.http
-      .get(this.appEnvironment.userApi.getAll(), this.getOptionsHeader())
+      .get(this.appEnvironment.repoApi.getByUser(userName), this.getOptionsHeader())
       .map(result => result.json())
       .catch(this.handleError);
   }
 
-  getUser(userName: string): Observable<UserDetail> {
-    return this.http
-      .get(this.appEnvironment.userApi.getUser(userName), this.getOptionsHeader())
-      .map(result => result.json())
-      .catch(this.handleError);
-  }
 }

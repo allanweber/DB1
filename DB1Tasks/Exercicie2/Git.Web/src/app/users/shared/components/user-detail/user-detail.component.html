@@ -1,0 +1,25 @@
+<div class="card" *ngIf="model">
+  <h5 class="card-header bg-dark text-white">
+    <a routerLink="/" class="text-white">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+    Detalhes do Usuário {{ model.login }}
+  </h5>
+  <div class="card-body">
+
+    <app-inline-form-label label="#" [value]="model.id"></app-inline-form-label>
+    <app-inline-form-label label="Login" [value]="model.login"></app-inline-form-label>
+    <app-inline-form-label label="Perfil" [value]="model.htmlUrl"></app-inline-form-label>
+    <app-inline-form-label label="Data de Criação" [value]="model.createdAt | date: 'dd/MM/yyyy'"></app-inline-form-label>
+
+    <div class="card" *ngIf="model">
+        <h5 class="card-header">
+          Repositórios do Usuário
+        </h5>
+        <div class="card-body">
+          <app-user-repositories [userName]="model.login"></app-user-repositories>
+        </div>
+      </div>
+
+  </div>
+</div>

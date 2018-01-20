@@ -11,9 +11,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of model">
-        <th scope="row">{{ user.id }}</th>
+        <th scope="row"><a [routerLink]="[user.login]" >{{ user.id }}</a></th>
         <td>{{ user.login }} </td>
-        <td> <a [routerLink]="[user.login]" ><i class="fas fa-user"></i></a> </td>
+        <td> <a [routerLink]="[user.login]" ><i class="fas fa-info-circle"></i></a> </td>
       </tr>
     </tbody>
   </table>

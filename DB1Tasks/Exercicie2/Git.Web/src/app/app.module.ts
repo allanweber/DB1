@@ -9,9 +9,12 @@ import { UsersComponent } from './users/users.component';
 import { UsersService } from './users/shared/services/users.service';
 import { AppEnvironment, AppEnvironmentFactory } from './app-environment';
 import { AppConfig, AppConfigFactory } from './app.config';
+import { UserDetailComponent } from './users/shared/components/user-detail/user-detail.component';
+import { InlineFormLabelComponent } from './users/shared/components/inline-form-label/inline-form-label.component';
+import { UserRepositoriesComponent } from './users/shared/components/user-repositories/user-repositories.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, UsersComponent],
+  declarations: [AppComponent, NavbarComponent, UsersComponent, UserDetailComponent, InlineFormLabelComponent, UserRepositoriesComponent],
   imports: [BrowserModule, HttpModule, routing],
   providers: [
     UsersService,
