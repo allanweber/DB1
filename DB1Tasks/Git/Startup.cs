@@ -2,6 +2,7 @@
 using Git.Domain.Constants;
 using Git.Domain.Services;
 using Git.Infrastructure.Services;
+using Git.Infrastructure.Services.Facades;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,7 @@ namespace Git
 
             services.AddScoped<IGitUserService, GitUserService>();
             services.AddScoped<IGitRepositoryService, GitRepositoryService>();
+            services.AddScoped<GitHubFacadeService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

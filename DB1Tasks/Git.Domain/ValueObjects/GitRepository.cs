@@ -6,7 +6,7 @@ namespace Git.Domain.ValueObjects
     public class GitRepository
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace Git.Domain.ValueObjects
         public GitUser Owner { get; set; }
 
         [JsonProperty("private")]
-        public bool Private { get; set; }
+        public bool? Private { get; set; }
 
         [JsonProperty("html_url")]
         public string HtmlUrl { get; set; }
@@ -27,7 +27,7 @@ namespace Git.Domain.ValueObjects
         public object Description { get; set; }
 
         [JsonProperty("fork")]
-        public bool Fork { get; set; }
+        public bool? Fork { get; set; }
 
         [JsonProperty("url")]
         public string Url { get; set; }
@@ -165,55 +165,55 @@ namespace Git.Domain.ValueObjects
         public object Homepage { get; set; }
 
         [JsonProperty("size")]
-        public long Size { get; set; }
+        public long? Size { get; set; }
 
         [JsonProperty("stargazers_count")]
-        public long StargazersCount { get; set; }
+        public long? StargazersCount { get; set; }
 
         [JsonProperty("watchers_count")]
-        public long WatchersCount { get; set; }
+        public long? WatchersCount { get; set; }
 
         [JsonProperty("language")]
         public string Language { get; set; }
 
         [JsonProperty("has_issues")]
-        public bool HasIssues { get; set; }
+        public bool? HasIssues { get; set; }
 
         [JsonProperty("has_projects")]
-        public bool HasProjects { get; set; }
+        public bool? HasProjects { get; set; }
 
         [JsonProperty("has_downloads")]
-        public bool HasDownloads { get; set; }
+        public bool? HasDownloads { get; set; }
 
         [JsonProperty("has_wiki")]
-        public bool HasWiki { get; set; }
+        public bool? HasWiki { get; set; }
 
         [JsonProperty("has_pages")]
-        public bool HasPages { get; set; }
+        public bool? HasPages { get; set; }
 
         [JsonProperty("forks_count")]
-        public long ForksCount { get; set; }
+        public long? ForksCount { get; set; }
 
         [JsonProperty("mirror_url")]
         public object MirrorUrl { get; set; }
 
         [JsonProperty("archived")]
-        public bool Archived { get; set; }
+        public bool? Archived { get; set; }
 
         [JsonProperty("open_issues_count")]
-        public long OpenIssuesCount { get; set; }
+        public long? OpenIssuesCount { get; set; }
 
         [JsonProperty("license")]
         public object License { get; set; }
 
         [JsonProperty("forks")]
-        public long Forks { get; set; }
+        public long? Forks { get; set; }
 
         [JsonProperty("open_issues")]
-        public long OpenIssues { get; set; }
+        public long? OpenIssues { get; set; }
 
         [JsonProperty("watchers")]
-        public long Watchers { get; set; }
+        public long? Watchers { get; set; }
 
         [JsonProperty("default_branch")]
         public string DefaultBranch { get; set; }

@@ -8,7 +8,7 @@ namespace Git.Domain.ValueObjects
         public string Login { get; set; }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         [JsonProperty("avatar_url")]
         public string AvatarUrl { get; set; }
@@ -53,6 +53,6 @@ namespace Git.Domain.ValueObjects
         public string Type { get; set; }
 
         [JsonProperty("site_admin")]
-        public bool SiteAdmin { get; set; }
+        public bool? SiteAdmin { get; set; }
     }
 }

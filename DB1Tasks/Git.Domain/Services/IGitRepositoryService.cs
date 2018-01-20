@@ -1,4 +1,4 @@
-﻿using Git.Domain.ValueObjects;
+﻿using Git.Domain.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,6 +6,6 @@ namespace Git.Domain.Services
 {
     public interface IGitRepositoryService
     {
-        Task<List<GitRepository>> GetUserRepositories(string userName);
+        Task<ICollection<Repository>> GetUserRepositories(string userName);
     }
 }

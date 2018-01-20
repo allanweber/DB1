@@ -9,7 +9,7 @@ namespace Git.Domain.ValueObjects
         public string Login { get; set; }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         [JsonProperty("avatar_url")]
         public string AvatarUrl { get; set; }
@@ -54,7 +54,7 @@ namespace Git.Domain.ValueObjects
         public string Type { get; set; }
 
         [JsonProperty("site_admin")]
-        public bool SiteAdmin { get; set; }
+        public bool? SiteAdmin { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -78,16 +78,16 @@ namespace Git.Domain.ValueObjects
         public object Bio { get; set; }
 
         [JsonProperty("public_repos")]
-        public long PublicRepos { get; set; }
+        public long? PublicRepos { get; set; }
 
         [JsonProperty("public_gists")]
-        public long PublicGists { get; set; }
+        public long? PublicGists { get; set; }
 
         [JsonProperty("followers")]
-        public long Followers { get; set; }
+        public long? Followers { get; set; }
 
         [JsonProperty("following")]
-        public long Following { get; set; }
+        public long? Following { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }

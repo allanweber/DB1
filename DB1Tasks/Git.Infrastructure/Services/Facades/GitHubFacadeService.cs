@@ -24,14 +24,31 @@ namespace Git.Infrastructure.Services.Facades
         {
             HttpClient client = this.GetHttpClient(this.configuration["git:url"]);
 
-            HttpResponseMessage responseMessage = await client.GetAsync(this.UsersPath);
+            var response = await this.GetResponse(client, this.UsersPath);
 
-            ICollection<GitUser> users = null;
-            if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                users = Newtonsoft.Json.JsonConvert.DeserializeObject<ICollection<GitUser>>(
-                    await responseMessage.Content.ReadAsStringAsync());
-            }
+            ICollection<GitUser> users = await this.DeserializeResponse<ICollection<GitUser>>(response);
+
+            return users;
+        }
+
+        public async Task<GitUserDetail> GetUser(string userName)
+        {
+            HttpClient client = this.GetHttpClient(this.configuration["git:url"]);
+
+            var response = await this.GetResponse(client, $"{this.UsersPath}/{userName}");
+
+            GitUserDetail users = await this.DeserializeResponse<GitUserDetail>(response);
+
+            return users;
+        }
+
+        public async Task<ICollection<GitRepository>> GetUserRepositories(string userName)
+        {
+            HttpClient client = this.GetHttpClient(this.configuration["git:url"]);
+
+            var response = await this.GetResponse(client, $"{this.UsersPath}/{userName}/repos");
+
+            ICollection<GitRepository> users = await this.DeserializeResponse<ICollection<GitRepository>>(response);
 
             return users;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Git.Infrastructure.Services.Facades
 {
@@ -22,6 +23,24 @@ namespace Git.Infrastructure.Services.Facades
             });
 
             return client;
+        }
+
+        protected async Task<HttpResponseMessage> GetResponse(HttpClient client, string route)
+        {
+            if (client == null) throw new NullReferenceException("HttpClient não pode ser nulo.");
+            return await client.GetAsync(route);
+        }
+
+        protected async Task<T> DeserializeResponse<T> (HttpResponseMessage response) where T : class
+        {
+            if (response == null) throw new NullReferenceException("HttpResponseMessage não pode ser nulo.");
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(
+                    await response.Content.ReadAsStringAsync());
+            }
+
+            return null;
         }
     }
 }

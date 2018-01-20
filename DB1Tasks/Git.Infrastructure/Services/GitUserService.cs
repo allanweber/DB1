@@ -1,6 +1,8 @@
-﻿using Git.Domain.Services;
+﻿using AutoMapper;
+using Git.Domain.Dtos;
+using Git.Domain.Services;
 using Git.Domain.ValueObjects;
-using System;
+using Git.Infrastructure.Services.Facades;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,14 +10,31 @@ namespace Git.Infrastructure.Services
 {
     public class GitUserService : IGitUserService
     {
-        public async Task<ICollection<GitUser>> GetAllUsers()
+        public GitUserService(GitHubFacadeService gitHubFacadeService, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.GitHubFacadeService = gitHubFacadeService;
+            this.Mapper = mapper;
         }
 
-        public async Task<GitUserDetail> GetUser(string userName)
+        public GitHubFacadeService GitHubFacadeService { get; }
+        public IMapper Mapper { get; }
+
+        public async Task<ICollection<User>> GetAllUsers()
         {
-            throw new NotImplementedException();
+            var usersGit = await this.GitHubFacadeService.GetAllUsers();
+
+            var users = this.Mapper.Map<ICollection<GitUser>, ICollection<User>>(usersGit);
+
+            return users;
+        }
+
+        public async Task<UserDetail> GetUser(string userName)
+        {
+            var userGit = await this.GitHubFacadeService.GetUser(userName);
+
+            var user = this.Mapper.Map<GitUserDetail, UserDetail>(userGit);
+
+            return user;
         }
     }
 }
