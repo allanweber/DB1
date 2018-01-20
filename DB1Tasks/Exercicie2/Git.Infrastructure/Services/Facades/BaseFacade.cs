@@ -41,8 +41,10 @@ namespace Git.Infrastructure.Services.Facades
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(
                     await response.Content.ReadAsStringAsync());
             }
-
-            return null;
+            else
+            {
+                throw new Exception($"Erro {(int)response.StatusCode} = {response.ReasonPhrase} ao acessar a api");
+            }
         }
     }
 }

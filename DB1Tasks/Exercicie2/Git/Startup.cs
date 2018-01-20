@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Git.Domain.Constants;
 using Git.Domain.Services;
+using Git.Filters;
 using Git.Infrastructure.Services;
 using Git.Infrastructure.Services.Facades;
+using Git.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +26,8 @@ namespace Git
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddMvcOptions(setup => setup.Filters.Add<NotificationFilterAttribute>());
             services.AddAutoMapper();
             services.AddSwaggerGen(s =>
             {
@@ -60,10 +63,9 @@ namespace Git
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            // app.UseExceptionHandler(configure => GlobalExceptionHandlerMiddleware.Handle(configure, env));
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseMvcWithDefaultRoute();
 
