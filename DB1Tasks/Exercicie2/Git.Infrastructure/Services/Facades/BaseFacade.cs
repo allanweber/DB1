@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -38,8 +39,7 @@ namespace Git.Infrastructure.Services.Facades
             if (response == null) throw new NullReferenceException("HttpResponseMessage não pode ser nulo.");
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(
-                    await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
             }
             else
             {

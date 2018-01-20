@@ -30,8 +30,6 @@ namespace Git.Infrastructure.Services.Facades
 
         public async Task<ICollection<GitUser>> GetAllUsers()
         {
-            var url = this.configuration.GetSection("git");
-
             HttpClient client = this.GetHttpClient(this.baseUrl, this.headers);
 
             var response = await this.GetResponse(client, this.UsersPath);

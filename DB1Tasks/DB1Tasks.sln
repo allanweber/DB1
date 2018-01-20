@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Git.Domain", "Exercicie2\Gi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Git", "Exercicie2\Git\Git.csproj", "{D27B7568-2492-4A22-A7DB-E2FE0FB508C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Git.Tests", "Exercicie2\Git.Tests\Git.Tests.csproj", "{C41CC665-14C1-4A15-9F9E-3455FB301215}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{D27B7568-2492-4A22-A7DB-E2FE0FB508C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D27B7568-2492-4A22-A7DB-E2FE0FB508C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D27B7568-2492-4A22-A7DB-E2FE0FB508C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41CC665-14C1-4A15-9F9E-3455FB301215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41CC665-14C1-4A15-9F9E-3455FB301215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41CC665-14C1-4A15-9F9E-3455FB301215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41CC665-14C1-4A15-9F9E-3455FB301215}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{31C20767-D975-4286-A39F-FE4E2D9E4132} = {A05EDBC6-7AA6-41DB-8A0C-8D4C2207BC8F}
 		{CC6E6F49-3D7A-4587-A95F-E34C6A0C96B7} = {A05EDBC6-7AA6-41DB-8A0C-8D4C2207BC8F}
 		{D27B7568-2492-4A22-A7DB-E2FE0FB508C8} = {A05EDBC6-7AA6-41DB-8A0C-8D4C2207BC8F}
+		{C41CC665-14C1-4A15-9F9E-3455FB301215} = {A05EDBC6-7AA6-41DB-8A0C-8D4C2207BC8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A95D3500-5FC7-4651-AA83-9B84C189A798}

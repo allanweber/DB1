@@ -56,6 +56,7 @@ namespace Git
                        .AllowAnyHeader();
             }));
 
+
             services.AddScoped<IGitUserService, GitUserService>();
             services.AddScoped<IGitRepositoryService, GitRepositoryService>();
             services.AddScoped<GitHubFacadeService>();
@@ -63,8 +64,6 @@ namespace Git
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // app.UseExceptionHandler(configure => GlobalExceptionHandlerMiddleware.Handle(configure, env));
-
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseMvcWithDefaultRoute();
