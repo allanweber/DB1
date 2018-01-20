@@ -12,7 +12,7 @@ namespace Git.Infrastructure.Services.Facades
             
         }
 
-        protected HttpClient GetHttpClient(string url, List<KeyValuePair<string, string>> headers = null)
+        protected HttpClient GetHttpClient(string url, List<KeyValuePair<string, string>> headers = null, string accept = "application/json")
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(url);
@@ -21,6 +21,8 @@ namespace Git.Infrastructure.Services.Facades
             {
                 client.DefaultRequestHeaders.Add(p.Key, p.Value);
             });
+
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(accept));
 
             return client;
         }

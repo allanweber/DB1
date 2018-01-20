@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
 
 namespace Git
 {
@@ -23,6 +26,25 @@ namespace Git
         {
             services.AddMvc();
             services.AddAutoMapper();
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1",
+                new Info
+                {
+                    Title = "Git",
+                    Version = "v1",
+                    Description = "Cosumo de apis do GitHunb",
+                    Contact = new Contact
+                    {
+                        Name = "Allan Cassiano Weber",
+                        Url = "https://github.com/allanweber"
+                    }
+                });
+
+                var basePath = AppContext.BaseDirectory;
+                var xmlPath = Path.Combine(basePath, "Git.xml");
+                s.IncludeXmlComments(xmlPath);
+            });
 
             services.AddCors(o => o.AddPolicy(AppConstants.ALLOWALLHEADERS, builder =>
             {
@@ -43,9 +65,16 @@ namespace Git
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
 
             app.UseCors(AppConstants.ALLOWALLHEADERS);
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "Git");
+            });
         }
     }
 }

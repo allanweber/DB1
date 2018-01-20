@@ -1,28 +1,38 @@
 ﻿using Git.Domain.ValueObjects;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Git.Infrastructure.Services.Facades
 {
     public class GitHubFacadeService : BaseFacade
     {
-        protected IConfigurationRoot configuration;
+        protected IConfiguration configuration;
 
         private readonly string UsersPath = "users";
 
-        public GitHubFacadeService() : base()
+        private List<KeyValuePair<string, string>> headers = null;
+
+        private string baseUrl = string.Empty;
+
+        public GitHubFacadeService(IConfiguration configuration) : base()
         {
-            this.loadConfiguration();
+            this.configuration = configuration;
+
+            this.baseUrl = this.configuration.GetSection("git:url").Get<string>();
+
+            headers = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("User-Agent", "Other")
+            };
         }
 
         public async Task<ICollection<GitUser>> GetAllUsers()
         {
-            HttpClient client = this.GetHttpClient(this.configuration["git:url"]);
+            var url = this.configuration.GetSection("git");
+
+            HttpClient client = this.GetHttpClient(this.baseUrl, this.headers);
 
             var response = await this.GetResponse(client, this.UsersPath);
 
@@ -33,7 +43,7 @@ namespace Git.Infrastructure.Services.Facades
 
         public async Task<GitUserDetail> GetUser(string userName)
         {
-            HttpClient client = this.GetHttpClient(this.configuration["git:url"]);
+            HttpClient client = this.GetHttpClient(this.baseUrl, this.headers);
 
             var response = await this.GetResponse(client, $"{this.UsersPath}/{userName}");
 
@@ -44,20 +54,13 @@ namespace Git.Infrastructure.Services.Facades
 
         public async Task<ICollection<GitRepository>> GetUserRepositories(string userName)
         {
-            HttpClient client = this.GetHttpClient(this.configuration["git:url"]);
+            HttpClient client = this.GetHttpClient(this.baseUrl, this.headers);
 
             var response = await this.GetResponse(client, $"{this.UsersPath}/{userName}/repos");
 
             ICollection<GitRepository> users = await this.DeserializeResponse<ICollection<GitRepository>>(response);
 
             return users;
-        }
-
-        private void loadConfiguration()
-        {
-            this.configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json.config", optional: true)
-                .Build();
         }
     }
 }
