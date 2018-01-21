@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class BaseRequests {
   getHeaders(): Headers {
     const headers = new Headers();
-    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('User-Agent', 'Other');
     return headers;
   }
 

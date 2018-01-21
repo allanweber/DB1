@@ -7,7 +7,6 @@ import { routing } from './app.routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UsersComponent } from './users/users.component';
 import { UsersService } from './users/shared/services/users.service';
-import { AppEnvironment, AppEnvironmentFactory } from './app-environment';
 import { AppConfig, AppConfigFactory } from './app.config';
 import { UserDetailComponent } from './users/shared/components/user-detail/user-detail.component';
 import { InlineFormLabelComponent } from './users/shared/components/inline-form-label/inline-form-label.component';
@@ -18,18 +17,6 @@ import { UserRepositoriesComponent } from './users/shared/components/user-reposi
   imports: [BrowserModule, HttpModule, routing],
   providers: [
     UsersService,
-    AppConfig,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: AppConfigFactory,
-      deps: [AppConfig],
-      multi: true
-    },
-    {
-      provide: AppEnvironment,
-      useFactory: AppEnvironmentFactory,
-      deps: [AppConfig]
-    }
   ],
   bootstrap: [AppComponent]
 })

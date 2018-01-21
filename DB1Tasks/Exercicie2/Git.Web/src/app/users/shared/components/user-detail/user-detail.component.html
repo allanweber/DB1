@@ -9,8 +9,8 @@
 
     <app-inline-form-label label="#" [value]="model.id"></app-inline-form-label>
     <app-inline-form-label label="Login" [value]="model.login"></app-inline-form-label>
-    <app-inline-form-label label="Perfil" [value]="model.htmlUrl"></app-inline-form-label>
-    <app-inline-form-label label="Data de Criação" [value]="model.createdAt | date: 'dd/MM/yyyy'"></app-inline-form-label>
+    <app-inline-form-label label="Perfil" [value]="model.html_url"></app-inline-form-label>
+    <app-inline-form-label label="Data de Criação" [value]="model.created_at | date: 'dd/MM/yyyy'"></app-inline-form-label>
 
     <div class="card" *ngIf="model">
         <h5 class="card-header">
