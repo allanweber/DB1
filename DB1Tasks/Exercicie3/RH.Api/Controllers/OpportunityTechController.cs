@@ -10,22 +10,22 @@ using RH.Domain.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RH.Controllers
+namespace RH.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/v1/[Controller]")]
     [EnableCors(AppConstants.ALLOWALLHEADERS)]
-    public class OpportunityController : Controller
+    public class OpportunityTechController: Controller
     {
         public IMapper Mapper { get; }
         public IMediator Mediator { get; }
-        public IOpportunityRepository Repository { get; }
+        public IOpportunityTechRepository Repository { get; }
 
-        public OpportunityController(IMapper mapper, IMediator mediator, IOpportunityRepository opportunityRepository)
+        public OpportunityTechController(IMapper mapper, IMediator mediator, IOpportunityTechRepository repository)
         {
             Mapper = mapper;
             Mediator = mediator;
-            Repository = opportunityRepository;
+            Repository = repository;
         }
 
         [HttpGet]
@@ -33,13 +33,13 @@ namespace RH.Controllers
         {
             var entity = await this.Repository.GetAllAsync();
 
-            var dto = Mapper.Map<List<Opportunity>, List<OpportunityDto>>(entity);
+            var dto = Mapper.Map<List<OpportunityTech>, List<OpportunityTechDto>>(entity);
 
             return this.Ok(dto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] OpportunityInsertCommand request)
+        public async Task<IActionResult> Post([FromBody] OpportunityTechInsertCommand request)
         {
             ICommandResult result = await this.Mediator.Send(request);
 
@@ -47,7 +47,7 @@ namespace RH.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] OpportunityUpdateCommand request)
+        public async Task<IActionResult> Put([FromBody] OpportunityTechUpdateCommand request)
         {
             ICommandResult result = await this.Mediator.Send(request);
 
@@ -58,7 +58,7 @@ namespace RH.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            OpportunityDeleteCommand candidate = new OpportunityDeleteCommand(id);
+            OpportunityTechDeleteCommand candidate = new OpportunityTechDeleteCommand(id);
             ICommandResult result = await this.Mediator.Send(candidate);
 
             return this.Ok(result);

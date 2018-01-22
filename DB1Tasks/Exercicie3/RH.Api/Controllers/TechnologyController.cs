@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using RH.Domain.CommandHandlers.Commands;
 using RH.Domain.Constants;
 using RH.Domain.Dtos;
-using RH.Domain.Services;
+using RH.Domain.Entities;
+using RH.Domain.Repositories;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RH.Controllers
@@ -12,44 +17,51 @@ namespace RH.Controllers
     [EnableCors(AppConstants.ALLOWALLHEADERS)]
     public class TechnologyController : Controller
     {
-        public TechnologyController(ITechnologyService technologyService)
-        {
-            Service = technologyService;
-        }
+        public IMapper Mapper { get; }
+        public IMediator Mediator { get; }
+        public ITechnologyRepository Repository { get; }
 
-        public ITechnologyService Service { get; }
+        public TechnologyController(IMapper mapper, IMediator mediator, ITechnologyRepository technologyRepositoryRepository)
+        {
+            Mapper = mapper;
+            Mediator = mediator;
+            Repository = technologyRepositoryRepository;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var dto = await this.Service.GetAll();
+            var entity = await this.Repository.GetAllAsync();
+
+            var dto = Mapper.Map<List<Technology>, List<TechnologyDto>>(entity);
 
             return this.Ok(dto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TechnologyInsertDto technology)
+        public async Task<IActionResult> Post([FromBody] TechnologyInsertCommand request)
         {
-            await this.Service.Insert(technology);
+            ICommandResult result = await this.Mediator.Send(request);
 
-            return this.Ok();
+            return this.Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Post([FromBody] TechnologyDto technology)
+        public async Task<IActionResult> Put([FromBody] TechnologyUpdateCommand request)
         {
-            await this.Service.Update(technology);
+            ICommandResult result = await this.Mediator.Send(request);
 
-            return this.Ok();
+            return this.Ok(result);
         }
 
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await this.Service.Delete(id);
+            TechnologyDeleteCommand candidate = new TechnologyDeleteCommand(id);
+            ICommandResult result = await this.Mediator.Send(candidate);
 
-            return this.Ok();
+            return this.Ok(result);
         }
     }
 }

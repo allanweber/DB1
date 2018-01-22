@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
+using RH.Domain.CommandHandlers.Commands;
 using RH.Domain.Dtos;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace RH.Tests
             Assert.False(opportunities.Any(), "Retornou Oportunidade quando não deveria");
 
 
-            OpportunityInsertDto insert = new OpportunityInsertDto { Name = "Programador" };
+            OpportunityInsertCommand insert = new OpportunityInsertCommand { Name = "Programador" };
             var response = await client.PostAsync("api/v1/Opportunity", new StringContent(JsonConvert.SerializeObject(insert), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             Assert.True(response.StatusCode == System.Net.HttpStatusCode.OK, "Status deveria ser 200");
@@ -52,7 +53,7 @@ namespace RH.Tests
             opportunities = getFunc();
             Assert.True(opportunities.Any(), "Deveria retornar uma tecnologia");
 
-            OpportunityDto update = new OpportunityDto { Id = 1, Name = "Programador.NET" };
+            OpportunityUpdateCommand update = new OpportunityUpdateCommand { Id = 1, Name = "Programador.NET" };
             response = await client.PutAsync("api/v1/Opportunity", new StringContent(JsonConvert.SerializeObject(update), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             Assert.True(response.StatusCode == System.Net.HttpStatusCode.OK, "Status deveria ser 200");

@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
+using RH.Domain.CommandHandlers.Commands;
 using RH.Domain.Dtos;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace RH.Tests
             Assert.False(techs.Any(), "Retornou tecnologia quando não deveria");
 
 
-            TechnologyInsertDto insert = new TechnologyInsertDto { Name = ".NET" };
+            TechnologyInsertCommand insert = new TechnologyInsertCommand { Name = ".NET" };
             var response = await client.PostAsync("api/v1/Technology", new StringContent(JsonConvert.SerializeObject(insert), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             Assert.True(response.StatusCode == System.Net.HttpStatusCode.OK, "Status deveria ser 200");
@@ -52,7 +53,7 @@ namespace RH.Tests
             techs = getFunc();
             Assert.True(techs.Any(), "Deveria retornar uma tecnologia");
 
-            TechnologyDto update = new TechnologyDto { Id = 1, Name = ".NET Core" };
+            TechnologyUpdateCommand update = new TechnologyUpdateCommand { Id = 1, Name = ".NET Core" };
             response = await client.PutAsync("api/v1/Technology", new StringContent(JsonConvert.SerializeObject(update), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             Assert.True(response.StatusCode == System.Net.HttpStatusCode.OK, "Status deveria ser 200");

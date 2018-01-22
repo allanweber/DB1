@@ -2,15 +2,15 @@
 
 namespace RH.Domain.Entities
 {
-    public class CandidateTech: BaseEntity
+    public class OpportunityTech: BaseEntity
     {
-        public int CandidateId { get; private set; }
+        public int OpportunityId { get; private set; }
 
         public int TechnologyId { get; private set; }
 
         public int Percentage { get; private set; }
 
-        public Candidate Candidate { get; set; }
+        public Opportunity Opportunity { get; set; }
 
         public Technology Technology { get; set; }
     }

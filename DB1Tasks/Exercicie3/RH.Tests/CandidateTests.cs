@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
+using RH.Domain.CommandHandlers.Commands;
 using RH.Domain.Dtos;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,10 @@ namespace RH.Tests
                 return result;
             };
 
-
             ICollection<CandidateDto> candidates = getFunc();
             Assert.False(candidates.Any(), "Retornou Candidato quando não deveria");
 
-
-            CandidateInsertDto insert = new CandidateInsertDto { Name = "Allan" };
+            CandidateInsertCommand insert = new CandidateInsertCommand { Name = "Allan" };
             var response = await client.PostAsync("api/v1/Candidate", new StringContent(JsonConvert.SerializeObject(insert), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             Assert.True(response.StatusCode == System.Net.HttpStatusCode.OK, "Status deveria ser 200");
@@ -52,7 +51,7 @@ namespace RH.Tests
             candidates = getFunc();
             Assert.True(candidates.Any(), "Deveria retornar uma Candidato");
 
-            CandidateDto update = new CandidateDto { Id = 1, Name = "Allan Weber" };
+            CandidateUpdateCommand update = new CandidateUpdateCommand { Id = 1, Name = "Allan Weber" };
             response = await client.PutAsync("api/v1/Candidate", new StringContent(JsonConvert.SerializeObject(update), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             Assert.True(response.StatusCode == System.Net.HttpStatusCode.OK, "Status deveria ser 200");

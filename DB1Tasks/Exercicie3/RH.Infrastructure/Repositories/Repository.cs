@@ -12,7 +12,7 @@ namespace RH.Infrastructure.Repositories
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly DbContext dbContext;
-        private readonly DbSet<TEntity> dbSet;
+        protected readonly DbSet<TEntity> dbSet;
 
         public Repository(PrincipalDbContext dbContext)
         {
@@ -20,17 +20,17 @@ namespace RH.Infrastructure.Repositories
             this.dbSet = this.dbContext.Set<TEntity>();
         }
 
-        public Task CommitAsync()
+        public virtual Task CommitAsync()
         {
             return this.dbContext.SaveChangesAsync();
         }
 
-        public Task<long> CountAsync()
+        public virtual Task<long> CountAsync()
         {
             return this.Query().LongCountAsync();
         }
 
-        public Task<long> CountAsync(Expression<Func<TEntity, bool>> expression)
+        public virtual Task<long> CountAsync(Expression<Func<TEntity, bool>> expression)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));
@@ -38,7 +38,7 @@ namespace RH.Infrastructure.Repositories
             return this.Query().LongCountAsync(expression);
         }
 
-        public Task DeleteAsync(TEntity entity)
+        public virtual Task DeleteAsync(TEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -46,7 +46,7 @@ namespace RH.Infrastructure.Repositories
             return Task.Run(() => this.dbSet.Remove(entity));
         }
 
-        public Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression)
+        public virtual Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));
@@ -54,7 +54,7 @@ namespace RH.Infrastructure.Repositories
             return this.Query().AnyAsync(expression);
         }
 
-        public Task<TEntity> GetAsync(params object[] keys)
+        public virtual Task<TEntity> GetAsync(params object[] keys)
         {
             if (keys == null)
                 throw new ArgumentNullException(nameof(keys));
@@ -62,7 +62,7 @@ namespace RH.Infrastructure.Repositories
             return this.dbSet.FindAsync(keys);
         }
 
-        public Task InsertAsync(TEntity entity)
+        public virtual Task InsertAsync(TEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -70,7 +70,7 @@ namespace RH.Infrastructure.Repositories
             return this.dbSet.AddAsync(entity);
         }
 
-        public Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> expression)
+        public virtual Task<List<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> expression)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));
@@ -78,7 +78,7 @@ namespace RH.Infrastructure.Repositories
             return this.Query().Where(expression).ToListAsync();
         }
 
-        public Task UpdateAsync(TEntity entity)
+        public virtual Task UpdateAsync(TEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -96,7 +96,7 @@ namespace RH.Infrastructure.Repositories
             return this.dbSet.AsNoTracking();
         }
 
-        public Task<List<TEntity>> GetAllAsync()
+        public virtual Task<List<TEntity>> GetAllAsync()
         {
             return this.Query().ToListAsync();
         }

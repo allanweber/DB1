@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RH.Api.Filters;
 using RH.Domain.Constants;
 using RH.Domain.Core.Repositories;
 using RH.Domain.Repositories;
-using RH.Domain.Services;
 using RH.Infrastructure.Repositories;
-using RH.Infrastructure.Services;
 using RH.Middlewares;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
@@ -42,9 +42,11 @@ namespace RH
                 }
             });
 
-            services.AddMvc();
+            services.AddMvc().AddMvcOptions(setup => setup.Filters.Add<CommandResultFilterAttribute>());
 
             services.AddAutoMapper();
+
+            services.AddMediatR();
 
             services.AddSwaggerGen(s =>
             {
@@ -75,12 +77,10 @@ namespace RH
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ITechnologyRepository, TechnologyRepository>();
-            services.AddScoped<ITechnologyService, TechnologyService>();
             services.AddScoped<IOpportunityRepository, OpportunityRepository>();
-            services.AddScoped<IOpportunityService, OpportunityService>();
             services.AddScoped<ICandidateRepository, CandidateRepository>();
-            services.AddScoped<ICandidateService, CandidateService>();
             services.AddScoped<ICandidateTechRepository, CandidateTechRepository>();
+            services.AddScoped<IOpportunityTechRepository, OpportunityTechRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
