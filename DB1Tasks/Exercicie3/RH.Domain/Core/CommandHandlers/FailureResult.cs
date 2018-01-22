@@ -1,4 +1,4 @@
-﻿namespace RH.Domain.CommandHandlers.Commands
+﻿namespace RH.Domain.Core.CommandHandlers
 {
     public class FailureResult : ICommandResult
     {

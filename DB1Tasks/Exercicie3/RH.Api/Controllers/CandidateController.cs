@@ -19,7 +19,7 @@ namespace RH.Controllers
     [Route("api/v1/[Controller]")]
     [EnableCors(AppConstants.ALLOWALLHEADERS)]
     public class CandidateController :
-        BaseCrudAppServiceController<
+        BaseCrudController<
             ICandidateRepository,
             Candidate,
             CandidateInsertCommand,

@@ -1,18 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RH.Domain.CommandHandlers.Commands;
+using RH.Domain.Core.CommandHandlers;
 using RH.Domain.Core.Dtos;
 using RH.Domain.Core.Entities;
 using RH.Domain.Core.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RH.Api.Core
 {
-    public class BaseCrudAppServiceController<TRepository, TEntity, TInsertCommand, TUpdateCommand, TDeleteCommand, TGetListDto>: Controller
+    public class BaseCrudController<TRepository, TEntity, TInsertCommand, TUpdateCommand, TDeleteCommand, TGetListDto>: Controller
         where TRepository : IRepository<TEntity>
         where TEntity : BaseEntity
         where TInsertCommand : IRequest<ICommandResult>
@@ -24,7 +22,7 @@ namespace RH.Api.Core
         public IMediator Mediator { get; }
         public IRepository<TEntity> Repository { get; }
 
-        protected BaseCrudAppServiceController(IMapper mapper, IMediator mediator, IRepository<TEntity> repository)
+        protected BaseCrudController(IMapper mapper, IMediator mediator, IRepository<TEntity> repository)
         {
             this.Mapper = mapper;
             this.Mediator = mediator;

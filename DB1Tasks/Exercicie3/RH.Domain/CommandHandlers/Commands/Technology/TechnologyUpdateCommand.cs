@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using RH.Domain.Core.CommandHandlers;
 
 namespace RH.Domain.CommandHandlers.Commands
 {

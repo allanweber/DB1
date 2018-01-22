@@ -7,7 +7,6 @@ import { routing } from './app.routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UsersComponent } from './users/users.component';
 import { UsersService } from './users/shared/services/users.service';
-import { AppConfig, AppConfigFactory } from './app.config';
 import { UserDetailComponent } from './users/shared/components/user-detail/user-detail.component';
 import { InlineFormLabelComponent } from './users/shared/components/inline-form-label/inline-form-label.component';
 import { UserRepositoriesComponent } from './users/shared/components/user-repositories/user-repositories.component';

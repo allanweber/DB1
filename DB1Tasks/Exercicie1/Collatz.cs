@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Exercicie1
 {
-    public class CollatzService
+    public class Collatz
     {
         private int sequenceLength = 0;
         public int SequenceLength { get { return sequenceLength; } }
@@ -14,7 +14,7 @@ namespace Exercicie1
 
         private int maxNumber;
 
-        public CollatzService(int maxNumber)
+        public Collatz(int maxNumber)
         {
             this.maxNumber = maxNumber;
         }

@@ -18,7 +18,7 @@ namespace RH.Api.Controllers
     [Route("api/v1/[Controller]")]
     [EnableCors(AppConstants.ALLOWALLHEADERS)]
     public class OpportunityTechController :
-        BaseCrudAppServiceController<
+        BaseCrudController<
             IOpportunityTechRepository,
             OpportunityTech,
             OpportunityTechInsertCommand,

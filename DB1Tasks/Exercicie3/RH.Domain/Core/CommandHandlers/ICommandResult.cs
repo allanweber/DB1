@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace RH.Domain.CommandHandlers.Commands
+﻿namespace RH.Domain.Core.CommandHandlers
 {
     public interface ICommandResult
     {

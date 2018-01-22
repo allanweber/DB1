@@ -28,7 +28,7 @@ namespace Exercicie1
             watch.Start();
 
             int oneMillion = 1000000;
-            CollatzService service = new CollatzService(oneMillion);
+            Collatz service = new Collatz(oneMillion);
             service.Calc();
 
             Console.WriteLine($"O número {service.StartingNumber} produz a maior sequencia de {service.SequenceLength} iterações.");
@@ -46,9 +46,8 @@ namespace Exercicie1
             watch.Start();
 
             int[] numbers = { 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
-
-            Func<int, bool> oddNumberWhere = (int number) => { return number % 2 != 0; };
-            var result = numbers.All(oddNumberWhere);
+            OddNumber odd = new OddNumber(numbers);
+            bool result = odd.HasOnlyOdd();
 
             Console.WriteLine($"A lista{(!result ? " não" : string.Empty)} contém somente números ímpares");
 
@@ -65,10 +64,10 @@ namespace Exercicie1
             watch.Start();
 
             int[] firstArray = { 1, 3, 7, 29, 42, 98, 234, 93 };
-
             int[] secondArray = { 4, 6, 93, 7, 55, 32, 3 };
 
-            List<int> result = firstArray.Where(num => !secondArray.Contains(num)).ToList();
+            DifferenceCollections difference = new DifferenceCollections(firstArray, secondArray);
+            List<int> result = difference.ExtractDifference().ToList();
 
             Console.WriteLine($"Lista de diferença entre arrays: { String.Join(",", result.ConvertAll(i => i.ToString()).ToArray()) }");
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RH.Domain.CommandHandlers.Commands;
+using RH.Domain.Core.CommandHandlers;
 using RH.Domain.Entities;
 using RH.Domain.Repositories;
 using System;

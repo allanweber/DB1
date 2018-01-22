@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using RH.Domain.CommandHandlers.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using RH.Domain.Core.CommandHandlers;
 using System.Threading.Tasks;
 
 namespace RH.Api.Filters

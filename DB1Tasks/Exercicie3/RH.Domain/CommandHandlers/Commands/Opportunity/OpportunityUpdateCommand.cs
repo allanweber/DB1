@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using RH.Domain.Core.CommandHandlers;
 
 namespace RH.Domain.CommandHandlers.Commands
 {
-    public class CandidateUpdateCommand: IRequest<ICommandResult>
+    public class OpportunityUpdateCommand : IRequest<ICommandResult>
     {
         public int Id { get; set; }
 

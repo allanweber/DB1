@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using RH.Domain.CommandHandlers.Commands;
+using RH.Domain.Core.CommandHandlers;
 using RH.Domain.Dtos;
 using System;
 using System.Collections.Generic;
