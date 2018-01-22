@@ -3,7 +3,7 @@ using RH.Domain.Core.Entities;
 
 namespace RH.Domain.CommandHandlers.Commands
 {
-    public class CandidateTechDeleteCommand : BaseEntity, IRequest<ICommandResult>
+    public class OpportunityCandidateDeleteCommand : BaseEntity, IRequest<ICommandResult>
     {
     }
 }

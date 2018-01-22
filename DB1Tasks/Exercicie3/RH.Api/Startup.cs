@@ -9,7 +9,9 @@ using RH.Api.Filters;
 using RH.Domain.Constants;
 using RH.Domain.Core.Repositories;
 using RH.Domain.Repositories;
+using RH.Domain.Services;
 using RH.Infrastructure.Repositories;
+using RH.Infrastructure.Services;
 using RH.Middlewares;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
@@ -81,6 +83,8 @@ namespace RH
             services.AddScoped<ICandidateRepository, CandidateRepository>();
             services.AddScoped<ICandidateTechRepository, CandidateTechRepository>();
             services.AddScoped<IOpportunityTechRepository, OpportunityTechRepository>();
+            services.AddScoped<IOpportunityCandidateRepository, OpportunityCandidateRepository>();
+            services.AddScoped<IScreeningService, ScreeningService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

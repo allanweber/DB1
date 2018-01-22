@@ -23,6 +23,9 @@ namespace RH.Infrastructure.Mappers
 
             this.CreateMap<OpportunityTechInsertCommand, OpportunityTech>();
             this.CreateMap<OpportunityTechUpdateCommand, OpportunityTech>();
+
+            this.CreateMap<OpportunityCandidateInsertCommand, OpportunityCandidate>();
+            this.CreateMap<OpportunityCandidateUpdateCommand, OpportunityCandidate>();
         }
     }
 }

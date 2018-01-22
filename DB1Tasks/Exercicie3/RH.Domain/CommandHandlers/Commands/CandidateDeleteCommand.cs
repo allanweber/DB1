@@ -1,14 +1,9 @@
 ﻿using MediatR;
+using RH.Domain.Core.Entities;
 
 namespace RH.Domain.CommandHandlers.Commands
 {
-    public class CandidateDeleteCommand : IRequest<ICommandResult>
+    public class CandidateDeleteCommand : BaseEntity,  IRequest<ICommandResult>
     {
-        public CandidateDeleteCommand(int id)
-        {
-            this.Id = id;
-        }
-
-        public int Id { get; set; }
     }
 }

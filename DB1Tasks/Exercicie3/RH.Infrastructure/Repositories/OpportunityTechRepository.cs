@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RH.Domain.Dtos;
 using RH.Domain.Entities;
 using RH.Domain.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RH.Infrastructure.Repositories
@@ -34,6 +33,19 @@ namespace RH.Infrastructure.Repositories
             return this.dbSet.AsQueryable()
                 .Include(c => c.Opportunity).Include(c => c.Technology)
                 .ToListAsync();
+        }
+
+        public async Task<List<OpportunityTechnologyDto>> GetAllTechnologyByOpportunity(int opportunityId)
+        {
+            var query = await this.Query()
+                .Include(o => o.Opportunity).Include(c => c.Technology)
+                .Where(o => o.OpportunityId == opportunityId)
+                .OrderByDescending(o => o.Percentage)
+                .ToListAsync();
+
+            return (from tech in query
+                    select new OpportunityTechnologyDto { Id = tech.Id, Name = tech.Technology.Name, Percentage = tech.Percentage })
+                    .ToList();
         }
     }
 }

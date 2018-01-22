@@ -10,24 +10,24 @@ using RH.Domain.Dtos;
 using RH.Domain.Entities;
 using RH.Domain.Repositories;
 
-namespace RH.Controllers
+namespace RH.Api.Controllers
 {
     /// <summary>
-    /// Api de tecnologias
+    /// Api de candidatos para oportunidade
     /// </summary>
     [Produces("application/json")]
     [Route("api/v1/[Controller]")]
     [EnableCors(AppConstants.ALLOWALLHEADERS)]
-    public class TechnologyController :
-        BaseCrudAppServiceController<
-            ITechnologyRepository,
-            Technology,
-            TechnologyInsertCommand,
-            TechnologyUpdateCommand,
-            TechnologyDeleteCommand,
-            TechnologyDto>
+    public class OpportunityCandidateController
+        : BaseCrudAppServiceController
+        <IOpportunityCandidateRepository,
+            OpportunityCandidate,
+            OpportunityCandidateInsertCommand,
+            OpportunityCandidateUpdateCommand,
+            OpportunityCandidateDeleteCommand,
+            OpportunityCandidateDto>
     {
-        public TechnologyController(IMapper mapper, IMediator mediator, IRepository<Technology> repository) 
+        public OpportunityCandidateController(IMapper mapper, IMediator mediator, IOpportunityCandidateRepository repository) 
             : base(mapper, mediator, repository)
         {
         }

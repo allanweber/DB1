@@ -1,14 +1,9 @@
 ﻿using MediatR;
+using RH.Domain.Core.Entities;
 
 namespace RH.Domain.CommandHandlers.Commands
 {
-    public class OpportunityTechDeleteCommand: IRequest<ICommandResult>
+    public class OpportunityTechDeleteCommand: BaseEntity, IRequest<ICommandResult>
     {
-        public OpportunityTechDeleteCommand(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; set; }
     }
 }

@@ -17,8 +17,4 @@
     <ProjectReference Include="..\RH.Domain\RH.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

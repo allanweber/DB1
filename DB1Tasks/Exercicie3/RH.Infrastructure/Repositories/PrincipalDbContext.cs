@@ -18,6 +18,7 @@ namespace RH.Infrastructure.Repositories
             modelBuilder.ApplyConfiguration<Candidate>(new CandidateMap());
             modelBuilder.ApplyConfiguration<CandidateTech>(new CandidateTechMap());
             modelBuilder.ApplyConfiguration<OpportunityTech>(new OpportunityTechMap());
+            modelBuilder.ApplyConfiguration<OpportunityCandidate>(new OpportunityCandidateMap());
 
             base.OnModelCreating(modelBuilder);
         }
